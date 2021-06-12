@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<script  type="text/javascript" src="./node_modules/jquery/dist/jquery.js"  charset="UTF-8"></script>-->
+    <script type="text/javascript"  src="./js/crypto-js.js" charset="UTF-8"></script>
+    <title>3DES加密解密与Base64编码解码处理数据</title>
+    <style type="text/css">
+        body {
+            margin: 100px;
+        }
+        p, button {
+            font-size: 30px;
+        }
+        .btn2 {
+            margin-left: 100px;
+        }
+        textarea{
+            resize: none;
+            width: 300px;
+        }
+    </style>
+    <script type="text/javascript">
+        //秘钥key
+        var key = "119115110000000000000000";
+        //key不足24位自动以0(最小位数是0)补齐,如果多余24位,则截取前24位,后面多余则舍弃掉
+        var base64key = CryptoJS.enc.Utf8.parse(key);
+        console.log(base64key);
+        alert(base64key);
+        //加密使用的是3DES中的ECB,解密对应的使用ECB
+        function encrypt() {
+            var text = document.getElementById('content').value+'';
+            var encrypt = CryptoJS.TripleDES.encrypt(text, base64key, {
+                    mode: CryptoJS.mode.ECB,  //ECB模式
+                    padding: CryptoJS.pad.Pkcs7//padding处理
+                }
+            );
+            //var encryptData = encrypt.toString(CryptoJS.enc.Hex);//加密完成后，转换成字符串
+            var encryptData = encrypt.ciphertext.toString().toUpperCase();
+            console.log(encryptData);
+            document.getElementById("encrypt").innerText=encryptData;
+        }
+    </script>
+
+</head>
+<body>
+<h1>原文:</h1><textarea rows="30" cols="60" id="content"></textarea>
+<h1 style="color: red;">加密编码后:</h1><p id="encrypt"></p>
+<button onclick="encrypt()">加密</button>
+</html>
