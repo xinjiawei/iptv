@@ -13,7 +13,7 @@ const write = promisify(fs.writeFile)
 async function getip() {
 	var options = {
 		'method': 'GET',
-		'url': 'http://192.168.4.145:9000/registerData/registerData.ac?opt=100&data=0010039900608930163450016B24DF9A|10.78.197.58|100|86567a02-1677-40ef-9ccd-1e9656874654||50:01:6B:24:DF:9A|Hi3798MV100|V100R005C10LHED02B012|EC6108V9U_pub_hbjdx|4.4.2|0|Huawei|Hi3798M|RTKFHDHDR|RTK|640x480|0|QM|3.1.1.05',
+		'url': 'http://192.168.4.145:9000/registerData/registerData.ac?opt=100&data=001000000000000000000000000|10.78.197.58|100|86567a02-0000-0000-0000-1e9656874654||50:01:6B:00:00:00|Hi3798MV100|V100R005C10LHED02B012|EC6108V9U_pub_hbjdx|4.4.2|0|Huawei|Hi3798M|RTKFHDHDR|RTK|640x480|0|QM|3.1.1.05',
 		'headers': {}
 	}
 	request(options, function(error, response) {
@@ -37,9 +37,9 @@ getip(options,function(ip) {
 async function gettoken1() {
 	var options = {
 		'method': 'GET',
-		'url': 'http://192.168.49.11:33200/EPG/jsp/authLoginHWCTC.jsp?UserID=ip15621646939@itv&VIP',
+		'url': 'http://192.168.49.11:33200/EPG/jsp/authLoginHWCTC.jsp?UserID=ip15621640000@itv&VIP',
 		'headers': {
-			'Referer': 'http://192.168.49.11:33200/EPG/jsp/AuthenticationURL?UserID=ip15621646939@itv&Action=Login'
+			'Referer': 'http://192.168.49.11:33200/EPG/jsp/AuthenticationURL?UserID=ip15621640000@itv&Action=Login'
 		}
 	}
 	request(options, function(error, response) {
@@ -78,7 +78,7 @@ async function ency(param) {
 		//000000000
 		var options = {
 			'method': 'GET',
-			'url': 'http://192.168.49.11:33200/EPG/jsp/ValidAuthenticationHWCTC.jsp?UserID=ip15621646939@itv&Lang=1&SupportHD=1&NetUserID&Authenticator=' + encryptData + '&STBType=EC6108V9U_pub_hbjdx&STBVersion=V100R005C10LHED02B012&conntype=4&STBID=0010039900608930163450016B24DF9A&templateName=hbdxggpt&areaId=8130728&userToken=' + token1 + '&userGroupId=1&productPackageId=-1&mac=50:01:6B:24:DF:9A&UserField=2&SoftwareVersion=V100R005C10LHED02B012&IsSmartStb=0&desktopId&stbmaker&VIP',
+			'url': 'http://192.168.49.11:33200/EPG/jsp/ValidAuthenticationHWCTC.jsp?UserID=ip15621640000@itv&Lang=1&SupportHD=1&NetUserID&Authenticator=' + encryptData + '&STBType=EC6108V9U_pub_hbjdx&STBVersion=V100R005C10LHED02B012&conntype=4&STBID=0010000000000000000000000000000&templateName=hbdxggpt&areaId=81300000&userToken=' + token1 + '&userGroupId=1&productPackageId=-1&mac=50:01:6B:00:00:00&UserField=2&SoftwareVersion=V100R005C10LHED02B012&IsSmartStb=0&desktopId&stbmaker&VIP',
 			'headers': {}
 		};
 		request(options, function(error, response) {
@@ -118,7 +118,7 @@ async function getlist(second) {
     setTimeout(() => {
 			var options = {
 					'method': 'POST',
-					'url': 'http://192.168.49.11:33200/EPG/jsp/getchannellistHWCTC.jsp?conntype=4&UserToken=' + token2 + '&tempKey=768B4A3E61A35AB81F6426901A01320D&stbid=990060&SupportHD=1&UserID=ip15621646939@itv&Lang=1',
+					'url': 'http://192.168.49.11:33200/EPG/jsp/getchannellistHWCTC.jsp?conntype=4&UserToken=' + token2 + '&tempKey=768B0000000000000000000&stbid=990060&SupportHD=1&UserID=ip15600000000@itv&Lang=1',
 					'headers': {
 						'Cookie': 'JSESSIONID=' + cookie
 					}
@@ -174,7 +174,7 @@ async function doit() {
 	await gettoken1()
 	let ip = await read('./ip.json')
 	let token1 = await read('./token1.json')
-	var text = "999999" + "$" + token1 + "$ip15621646939@itv$0010039900608930163450016B24DF9A$" + ip + "$50:01:6b:24:df:9a$$CTC";
+	var text = "999999" + "$" + token1 + "$ip15600000000@itv$0010000000000000000000000$" + ip + "$50:01:6b:00:00:00$$CTC";
 	var NowTime2 = new Date();
 	console.log(NowTime2 + "----已得到前置码,前置码为：" + text);
 	let encryptData = await ency({
