@@ -9,8 +9,8 @@ const write = promisify(fs.writeFile)
 
 
 async function getlist(second) {
-	let token2 = await read('./token2.json');
-	let cookie = await read('./cookies.json');
+	let token2 = await read('./token2.txt');
+	let cookie = await read('./cookies.txt');
 	console.log(token2.toString());
 	console.log(cookie.toString());
     setTimeout(() => {
@@ -41,7 +41,7 @@ async function getlist(second) {
 						var finalInfo = new Object();
 						finalInfo.name = name;
 						finalInfo.url = url;
-						var finalInfoStr = JSON.stringify(finalInfo);
+						var finalInfoStr = txt.stringify(finalInfo);
 						console.log(finalInfoStr);
 						*/
 
