@@ -19,9 +19,9 @@ async function getip() {
 	request(options, function(error, response) {
 		if (error) throw new Error(error);
 		//console.log(response.body);
-		json = JSON.parse(response.body);
-		ip = json.networkip;
-		write('./ip.json', ip)
+		txt = txt.parse(response.body);
+		ip = txt.networkip;
+		write('./ip.txt', ip)
 		var NowTime2 = new Date();
 		console.log(NowTime2 + "----已得到ip,ip为：" + ip);
 	});
@@ -48,7 +48,7 @@ async function gettoken1() {
 		const $ = cheerio.load(response.body);
 		var str1 = $.html('script');
 		token1 = str1.match(new RegExp(/authform\.userToken\.value\s\=\s"(.*?)";/))[1];
-		write('./token1.json', token1)
+		write('./token1.txt', token1)
 		var NowTime2 = new Date();
 		console.log(NowTime2 + "----已得到token1,token1为：" + token1);
 
@@ -71,10 +71,10 @@ async function ency(param) {
 		var ciph = cipher.update(plaintext, 'utf8', 'hex');
 		ciph += cipher.final('hex');
 		encryptData = ciph.toString().toUpperCase();
-		write('./ency.json', encryptData);
+		write('./ency.txt', encryptData);
 		var NowTime2 = new Date();
 		console.log(NowTime2 + "----已得到验证码,验证码为：" + encryptData);
-		let token1 = await read('./token1.json');
+		let token1 = await read('./token1.txt');
 		//000000000
 		var options = {
 			'method': 'GET',
@@ -91,11 +91,11 @@ async function ency(param) {
 			//console.log(str2);
 			var NowTime2 = new Date();
 			console.log(NowTime2 + "----已获取token2,token2为：" + token2);
-			write('./token2.json', token2);
+			write('./token2.txt', token2);
 			var coo = response.headers['set-cookie'].toString();
 			var jsesid = coo.match(new RegExp(/JSESSIONID\=(.*?);\sDomain/))[1];
 			console.log(NowTime2 + "----已获取cookies,cookies为：" + jsesid);
-			write('./cookies.json', jsesid);
+			write('./cookies.txt', jsesid);
 		});
 
 		//000000000
@@ -105,14 +105,14 @@ async function ency(param) {
 
 	} catch (err) {
 		console.log(err);
-		write('./encyerr.json', err)
+		write('./encyerr.txt', err)
 	}
 
 }
 //00000000000000000000000000000000000000000000000000000
 async function getlist(second) {
-	let token2 = await read('./token2.json');
-	let cookie = await read('./cookies.json');
+	let token2 = await read('./token2.txt');
+	let cookie = await read('./cookies.txt');
 	console.log(token2.toString());
 	console.log(cookie.toString());
     setTimeout(() => {
@@ -146,8 +146,8 @@ async function getlist(second) {
 						//为对象赋值
 						finalInfo.name = name;
 						finalInfo.url = url;
-						//将对象转换为json格式
-						var finalInfoStr = JSON.stringify(finalInfo);
+						//将对象转换为txt格式
+						var finalInfoStr = txt.stringify(finalInfo);
 						console.log(finalInfoStr);
 						//next
 						str1 = str1.replace(/Authentication\.CTCSetConfig\('Channel'(.*?)\);/i, '/');
@@ -172,8 +172,8 @@ async function getlist(second) {
 async function doit() {
 	await getip()
 	await gettoken1()
-	let ip = await read('./ip.json')
-	let token1 = await read('./token1.json')
+	let ip = await read('./ip.txt')
+	let token1 = await read('./token1.txt')
 	var text = "999999" + "$" + token1 + "$ip15600000000@itv$001000000000000000000000000000$" + ip + "$50:01:6b:00:00:00$$CTC";
 	var NowTime2 = new Date();
 	console.log(NowTime2 + "----已得到前置码,前置码为：" + text);
