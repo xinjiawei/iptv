@@ -16,7 +16,7 @@ async function getlist(second) {
     setTimeout(() => {
 		var config = {
 		  method: 'post',
-		  url: 'http://192.168.49.11:33200/EPG/jsp/getchannellistHWCTC.jsp?conntype=4&UserToken=' + token2 + '&tempKey=768B4A3E61A35AB81F6426901A000000&stbid=990060&SupportHD=1&UserID=ip156001245@itv&Lang=1',
+		  url: 'http://192.168.49.11:33200/EPG/jsp/getchannellistHWCTC.jsp?conntype=4&UserToken=' + token2 + '&tempKey=760000000000000000000000000000&stbid=990060&SupportHD=1&UserID=ip15600000000@itv&Lang=1',
 		  headers: { 
 		  'Cookie' : 'JSESSIONID=' + cookie }
 		};
