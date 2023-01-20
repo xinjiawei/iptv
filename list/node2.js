@@ -37,9 +37,9 @@ getip(options,function(ip) {
 async function gettoken1() {
 	var options = {
 		'method': 'GET',
-		'url': 'http://192.168.49.11:33200/EPG/jsp/authLoginHWCTC.jsp?UserID=ip15621640000@itv&VIP',
+		'url': 'http://192.168.49.11:33200/EPG/jsp/authLoginHWCTC.jsp?UserID=ip15600000000@itv&VIP',
 		'headers': {
-			'Referer': 'http://192.168.49.11:33200/EPG/jsp/AuthenticationURL?UserID=ip15621640000@itv&Action=Login'
+			'Referer': 'http://192.168.49.11:33200/EPG/jsp/AuthenticationURL?UserID=ip15600000000@itv&Action=Login'
 		}
 	}
 	request(options, function(error, response) {
@@ -78,7 +78,7 @@ async function ency(param) {
 		//000000000
 		var options = {
 			'method': 'GET',
-			'url': 'http://192.168.49.11:33200/EPG/jsp/ValidAuthenticationHWCTC.jsp?UserID=ip15621640000@itv&Lang=1&SupportHD=1&NetUserID&Authenticator=' + encryptData + '&STBType=EC6108V9U_pub_hbjdx&STBVersion=V100R005C10LHED02B012&conntype=4&STBID=0010000000000000000000000000000&templateName=hbdxggpt&areaId=81300000&userToken=' + token1 + '&userGroupId=1&productPackageId=-1&mac=50:01:6B:00:00:00&UserField=2&SoftwareVersion=V100R005C10LHED02B012&IsSmartStb=0&desktopId&stbmaker&VIP',
+			'url': 'http://192.168.49.11:33200/EPG/jsp/ValidAuthenticationHWCTC.jsp?UserID=ip15600000000@itv&Lang=1&SupportHD=1&NetUserID&Authenticator=' + encryptData + '&STBType=EC6108V9U_pub_hbjdx&STBVersion=V100R005C10LHED02B012&conntype=4&STBID=0010000000000000000000000000000&templateName=hbdxggpt&areaId=81300000&userToken=' + token1 + '&userGroupId=1&productPackageId=-1&mac=50:01:6B:00:00:00&UserField=2&SoftwareVersion=V100R005C10LHED02B012&IsSmartStb=0&desktopId&stbmaker&VIP',
 			'headers': {}
 		};
 		request(options, function(error, response) {
@@ -174,7 +174,7 @@ async function doit() {
 	await gettoken1()
 	let ip = await read('./ip.json')
 	let token1 = await read('./token1.json')
-	var text = "999999" + "$" + token1 + "$ip15600000000@itv$0010000000000000000000000$" + ip + "$50:01:6b:00:00:00$$CTC";
+	var text = "999999" + "$" + token1 + "$ip15600000000@itv$001000000000000000000000000000$" + ip + "$50:01:6b:00:00:00$$CTC";
 	var NowTime2 = new Date();
 	console.log(NowTime2 + "----已得到前置码,前置码为：" + text);
 	let encryptData = await ency({
