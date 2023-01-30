@@ -1,0 +1,17 @@
+{
+  "name": "heiptv",
+  "version": "1.0.0",
+  "description": "heiptv on Docker",
+  "author": "nanmengong",
+  "main": "main.js",
+  "scripts": {
+    "start1": "node main.js",
+    "start2": "node getlist.js"
+  },
+  "dependencies": {
+	"cheerio": "1.0.0-rc.12",
+	"axios": "~1.2.3",
+	"crypto-js": "~4.1.1",
+	"request": "2.88.2"
+  }
+}
