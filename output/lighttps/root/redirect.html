@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跳转到 /status</title>
+    <script>
+        // 获取当前页面的网址
+        const currentUrl = window.location.href;
+        // 解析当前网址的基本部分
+        const url = new URL(currentUrl);
+        // 修改端口为4022
+        url.port = '4022';
+        // 添加/status路径
+        url.pathname = '/status';
+        // 跳转到新网址
+        window.location.href = url.href;
+    </script>
+</head>
+<body>
+    <p>正在跳转到 <a id="redirect-link" href="#">新网址</a>...</p>
+    <script>
+        // 显示新网址
+        document.getElementById('redirect-link').href = url.href;
+    </script>
+</body>
+</html>

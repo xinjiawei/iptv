@@ -1,0 +1,5 @@
+30 1,13 * * * /app/heiptv_emulate >> /app/config/app.log 2>&1 &
+10 2,14 * * * /bin/bash /app/move_to_webroot.sh
+0 0 * * 1,5 cat /dev/null > /app/config/app.log
+0 0 * * 1,5 cat /dev/null > /app/config/udpxy.log
+0 0 * * 1,5 cat /dev/null > /app/config/lighttpd_error.log
