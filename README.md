@@ -5,3 +5,7 @@
 ## 博客：https://blog.jiawei.xin/?p=1267
 > 请注意，这个项目是无法直接使用的。请根据自己的情况获取字段，尤其是几个认证服务器的地址。
 > 使用了 http://epg.51zmt.top:8000 的封面图匹配接口，请勿频繁请求，将会导致ip被封禁，建议一个星期运行一次。
+>
+> ![example](https://cf.mb6.top/lib/images/github/582574355.png)
+> ![example](https://cf.mb6.top/lib/images/github/698576572.png)
+> ![example](https://cf.mb6.top/lib/images/github/968527825.png)
