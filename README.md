@@ -27,7 +27,7 @@
     "tempkey": "抓包获得, 或者保持任意32位key即可, 数字0-9, 字母A-F",
     "default_cover_url": "若节目没有封面, 指定的默认封面地址",
     "syslog_host": "日志上报服务器地址, 如果报错就写127.0.0.1",
-    "syslog_port": "日志上报服务器端口, 如果报错就写8000",
+    "syslog_port": "日志上报服务器端口, 如果报错就写8080",
     "udpxy_host_url": "udpxy服务器播放地址前缀",
     "epg_host_url": "epg服务器地址, 理论上和上方地址一样",
     "epg_host_port": "epg服务器端口",
