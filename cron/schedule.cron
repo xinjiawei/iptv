@@ -3,4 +3,3 @@
 0 0 * * 1,5 cat /dev/null > /app/config/app.log
 0 0 * * 1,5 cat /dev/null > /app/config/udpxy.log
 0 0 * * 1,5 cat /dev/null > /app/config/lighttpd_error.log
-
