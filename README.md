@@ -11,12 +11,25 @@
 >
 > 博客：https://blog.jiawei.xin/?p=1267
 ## 注意
+>
 > 请注意，这个项目是无法直接使用的。请根据自己的情况获取字段，尤其是几个认证服务器的地址和认证参数。
-> 
-> ~~使用了 http://epg.51zmt.top:8000 的封面图匹配接口，请勿频繁请求，将会导致ip被封禁，建议一个星期运行一次。~~ 使用iptv盒子内置的台标
+>
+> 使用此项目首先需要
+> 1. 创建好两个目录并挂载, 如图
+>
+> ![example](https://cf.mb6.top/lib/images/github/698576572.png)
+>
+> 2. 然后把我提供的config和output目录内容提前放到挂载的对应目录, 否则内置web环境无法启动.
+> 3. 之后再启动容器, 等待首次启动生成配置文件, 编辑配置文件.
+>
+> 其他:
+>
+> 1. 内置了cron定时任务, 每天运行两次, 不需要再单独运行定时任务.
+>
+> 2. ~~使用了 http://epg.51zmt.top:8000 的封面图匹配接口，请勿频繁请求，将会导致ip被封禁，建议一个星期运行一次。~~ 现在使用iptv盒子内置的台标
 # 配置文件
 > 
-> 配置文件在第一次运行会自动生成, 位置为 /app/config/
+> 配置文件在第一次运行会自动生成, 容器内位置为 /app/config/
 >
 ## 解释
     "debug_mode": 0 调试模式, 会保存下来大量日志,默认关闭,
@@ -77,7 +90,6 @@
 > https://epg.mb6.top
 >
 > ![example](https://cf.mb6.top/lib/images/github/582574355.png)
-> ![example](https://cf.mb6.top/lib/images/github/698576572.png)
 > ![example](https://cf.mb6.top/lib/images/github/968527825.png)
 > ![example](https://cf.mb6.top/lib/images/github/yt84561g56t1g.png)
 > ![example](https://cf.mb6.top/lib/images/github/4gtwedsv49eg.png)
