@@ -49,19 +49,20 @@
     "udpxy_host_url": "udpxy服务器播放地址前缀",
     "epg_host_url": "epg服务器地址, 理论上和上方地址一样",
     "epg_host_port": "epg服务器端口",
-    "epg_during": "默认1.5天, 最好不动, 可能报错",
+    "epg_during": "未来的epg时间，默认1.5天, 最好不动, 可能报错",
+    "epg_before": "过去的epg时间，默认7.0天, 最好不动, 可能报错",
     "description": "欢迎使用",
     "null_description": "此节目提供商暂时没有提供导播源",
     "nullepginfo": "暂无导播信息",
-    "maxcount": "80 最好不动, 可能报错",
+    "maxcount": "1000 过去七天与未来一天半的epg数量总和",
     "timedelay_cover_get": 1000 最好不动, 可能报错,
     "timedelay_epg_get": 2000 最好不动, 可能报错
 ## 示例参数
 `
 {
 "debug_mode": 0,
-"main_version": "4.1.31",
-"compile_version": "2.5r",
+"main_version": "4.1.37",
+"compile_version": "2.9r",
 "host": "192.168.49.143",
 "port": "33200",
 "mac": "50:01:6B:24:**:**",
@@ -77,10 +78,11 @@
 "epg_host_url": "192.168.49.143",
 "epg_host_port": "33200",
 "epg_during": "1.5",
+"epg_before": "7.0",
 "description": "欢迎使用",
 "null_description": "此节目提供商暂时没有提供导播源",
 "nullepginfo": "暂无导播信息",
-"maxcount": 80,
+"maxcount": 1000,
 "timedelay_cover_get": 1000,
 "timedelay_epg_get": 2000
 }
