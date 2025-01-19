@@ -1,7 +1,7 @@
 # iptv 模拟
 ## 更新
 >
-> 2025.1.19 更新：支持获取过去7天epg，新增配置参数epg_before。
+> 2025.1.19 更新：支持获取过去7天epg，新增配置参数epg_before，basic_info_host，basic_info_port。调整休眠为至少100ms，防止风控。
 
 ## 简介
 > 河北（四川）电信iptv，模拟机顶盒内的逻辑获取直播源，无需udproxy。
@@ -40,12 +40,12 @@
     "debug_mode": 0 调试模式, 会保存下来大量日志,默认关闭,
     "main_version": "4.1.31",
     "compile_version": "2.5r",
-    "host": "直播服务器地址",
-    "port": "直播服务器端口",
-    "mac": "机顶盒mac",
-    "iptv_account": "iptv账号",
+    "host": "直播服务器地址，抓包获取",
+    "port": "直播服务器端口，抓包获取",
+    "mac": "机顶盒mac，抓包获取或者机顶盒贴纸获取",
+    "iptv_account": "iptv账号，抓包获取或营业厅获取或者设置页面获取",
     "iptv_passwd": "这个留空",
-    "stbid": "机顶盒设备id",
+    "stbid": "机顶盒设备id，抓包获取或者设置页面获取",
     "uuid_string": "这个留空",
     "tempkey": "抓包获得, 或者保持任意32位key即可, 数字0-9, 字母A-F",
     "default_cover_url": "若节目没有封面, 指定的默认封面地址",
@@ -53,15 +53,17 @@
     "syslog_port": "日志上报服务器端口, 如果报错就写8080",
     "udpxy_host_url": "udpxy服务器播放地址前缀",
     "epg_host_url": "epg服务器地址, 理论上和上方地址一样",
-    "epg_host_port": "epg服务器端口",
+    "epg_host_port": "epg服务器端口, 理论上和上方地址一样",
     "epg_during": "未来的epg时间，默认1.5天, 最好不动, 可能报错",
     "epg_before": "过去的epg时间，默认7.0天, 最好不动, 可能报错",
     "description": "欢迎使用",
     "null_description": "此节目提供商暂时没有提供导播源",
     "nullepginfo": "暂无导播信息",
-    "maxcount": "1000 过去七天与未来一天半的epg数量总和",
-    "timedelay_cover_get": 1000 最好不动, 可能报错,
-    "timedelay_epg_get": 2000 最好不动, 可能报错
+    "maxcount": "100 限制每天获取的epg数量",
+    "timedelay_cover_get": 100 最好不动, 可能报错,
+    "timedelay_epg_get": 100 最好不动, 可能报错
+    "basic_info_host": "注册管理服务器地址，抓包获取，目前发现填错好像也不影响使用"
+    "basic_info_port": "注册管理服务器端口，抓包获取，目前发现填错好像也不影响使用"
 ## 示例参数
 `
 {
@@ -76,7 +78,7 @@
 "stbid": "001003990060893016345001********",
 "uuid_string": "21dba401-33c5-40de-b1d0-4f30a7f60000",
 "tempkey": "768B********5AB81F642690********",
-"default_cover_url": "",
+"default_cover_url": "http://10.168.1.174:8080/images/default_iptv_icon.png",
 "syslog_host": "10.168.1.128",
 "syslog_port": 514,
 "udpxy_host_url": "http://10.168.1.174:4022/udp/",
@@ -87,9 +89,11 @@
 "description": "欢迎使用",
 "null_description": "此节目提供商暂时没有提供导播源",
 "nullepginfo": "暂无导播信息",
-"maxcount": 1000,
-"timedelay_cover_get": 1000,
-"timedelay_epg_get": 2000
+"maxcount": 100,
+"timedelay_cover_get": 100,
+"timedelay_epg_get": 100,
+"basic_info_host":"192.168.4.145",
+"basic_info_port":"9000"
 }
 `
 # 运行效果
