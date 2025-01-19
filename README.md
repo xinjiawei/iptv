@@ -1,4 +1,7 @@
 # iptv 模拟（软终端，软iptv）
+|  运行架构   | 测试型号  | 地区 | 测试结果 |
+|  ----  | ----  | ---- | ---- |
+| x86_64  | EC6108V9U_pub_hbjdx | 河北张家口电信 | ✅ |
 ## 更新
 >
 > 2025.1.19 更新：支持获取过去7天epg来实现回放。新增配置参数epg_before，basic_info_host，basic_info_port。调整休眠为至少100ms，防止风控。修正live_v2_rtsp.m3u格式以支持aptv。
