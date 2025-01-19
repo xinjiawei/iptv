@@ -1,4 +1,4 @@
-# iptv 模拟
+# iptv 模拟（软终端，软iptv）
 ## 更新
 >
 > 2025.1.19 更新：支持获取过去7天epg，新增配置参数epg_before，basic_info_host，basic_info_port。调整休眠为至少100ms，防止风控。修正live_v2_rtsp.m3u格式以支持aptv。
