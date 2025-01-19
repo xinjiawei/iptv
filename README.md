@@ -1,18 +1,18 @@
 # iptv 模拟（软终端，软iptv）
 ## 更新
 >
-> 2025.1.19 更新：支持获取过去7天epg，新增配置参数epg_before，basic_info_host，basic_info_port。调整休眠为至少100ms，防止风控。修正live_v2_rtsp.m3u格式以支持aptv。
+> 2025.1.19 更新：支持获取过去7天epg来实现回放。新增配置参数epg_before，basic_info_host，basic_info_port。调整休眠为至少100ms，防止风控。修正live_v2_rtsp.m3u格式以支持aptv。
 
 ## 简介
-> 河北（四川）电信iptv，模拟机顶盒内的逻辑获取直播源，无需udproxy。
+河北（四川）电信iptv，模拟机顶盒内的逻辑获取直播源和epg，集成udproxy。~~初学node试水作，不是很优雅。~~ 使用cpp重写。
+>
+> 1. 每日定时获取所有频道epg数据, 同时生成igmp和rtsp等三种格式的播放地址来实现兼容播放各种播放器，例如emby，mytv（天光云影），aptv。
 > 
-> ~~初学node试水作，不是很优雅。~~ 使用cpp重写, 内置udproxy, 每日定时获取所有频道epg数据, 生成igmp和rtsp等三种格式的播放地址来实现兼容播放各种播放器,例如emby，mytv（天光云影），aptv。内置lighttpd, 访问8080端口可以下载m3u和epg数据,访问4022端口使用内置udpxy。
->
-> docker 镜像生成后运行容器会生成配置文件, 需要手动改几个关键配置参数适配地方地区.
->
-> https://hub.docker.com/r/xinjiawei1/heiptv
->
-> 要获取node旧版本, 在main分支。
+> 2. 内置lighttpd，访问8080端口可以下载m3u和epg数据。
+> 
+> 3. 内置udpxy，访问4022端口使用内置udpxy。
+
+> docker镜像：https://hub.docker.com/r/xinjiawei1/heiptv
 >
 > 博客：https://blog.jiawei.xin/?p=1267
 ## 注意
