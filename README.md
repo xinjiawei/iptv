@@ -60,8 +60,8 @@
     "null_description": "此节目提供商暂时没有提供导播源",
     "nullepginfo": "暂无导播信息",
     "maxcount": "100 限制每天获取的epg数量",
-    "timedelay_cover_get": 100 最好不动, 可能报错,
-    "timedelay_epg_get": 100 最好不动, 可能报错
+    "timedelay_cover_get": 100 单位ms，最好不动, 可能报错,
+    "timedelay_epg_get": 100 单位ms，最好不动, 可能报错
     "basic_info_host": "注册管理服务器地址，抓包获取，目前发现填错好像也不影响使用"
     "basic_info_port": "注册管理服务器端口，抓包获取，目前发现填错好像也不影响使用"
 ## 示例参数
