@@ -1,18 +1,23 @@
-# iptv 模拟
+# iptv 模拟（软终端，软iptv）
+|  运行架构   | 测试型号  | 地区 | 测试结果 |
+|  ----  | ----  | ---- | ---- |
+| x86_64 unraid | EC6108V9U_pub_hbjdx | 河北张家口电信 | ✅ |
+| x86_64 openwrt | EC6108V9U_pub_hbjdx | 河北秦皇岛电信 | ✅ |
 ## 更新
 >
-> 2025.1.19 更新：支持获取过去7天epg，新增配置参数epg_before，basic_info_host，basic_info_port。调整休眠为至少100ms，防止风控。修正live_v2_rtsp.m3u格式以支持aptv。
-
+> 2025.1.19 更新：支持获取过去7天epg来实现回放。新增配置参数epg_before，basic_info_host，basic_info_port。调整休眠为至少100ms，防止风控。修正live_v2_rtsp.m3u格式以支持aptv。
+>
+> 2025.1.22 更新：修正若干代码问题。支持3DES加密秘钥crypto_key自定义。修正部分地区封面获取问题。
 ## 简介
-> 河北（四川）电信iptv，模拟机顶盒内的逻辑获取直播源，无需udproxy。
+河北（四川）电信iptv，模拟机顶盒内的逻辑获取直播源和epg，集成udproxy。~~初学node试水作，不是很优雅。~~ 使用cpp重写。
+>
+> 1. 每日定时获取所有频道epg数据, 同时生成igmp和rtsp等三种格式的播放地址来实现兼容播放各种播放器，例如emby，mytv（天光云影），aptv。
 > 
-> ~~初学node试水作，不是很优雅。~~ 使用cpp重写, 内置udproxy, 每日定时获取所有频道epg数据, 生成igmp和rtsp等三种格式的播放地址来实现兼容播放各种播放器,例如emby，mytv（天光云影），aptv。内置lighttpd, 访问8080端口可以下载m3u和epg数据,访问4022端口使用内置udpxy。
->
-> docker 镜像生成后运行容器会生成配置文件, 需要手动改几个关键配置参数适配地方地区.
->
-> https://hub.docker.com/r/xinjiawei1/heiptv
->
-> 要获取node旧版本, 在main分支。
+> 2. 内置lighttpd，访问8080端口可以下载m3u和epg数据。
+> 
+> 3. 内置udpxy，访问4022端口使用内置udpxy。
+
+> docker镜像：https://hub.docker.com/r/xinjiawei1/heiptv
 >
 > 博客：https://blog.jiawei.xin/?p=1267
 ## 注意
@@ -29,7 +34,7 @@
 >
 > 其他:
 >
-> 1. 内置了cron定时任务, 每天运行两次, 不需要再单独运行定时任务.
+> 1. 内置了cron定时任务, 每天运行两次, 不需要再单独运行定时任务. **如果你修改了默认的 timedelay_cover_get 和 timedelay_epg_get 参数，那么也需要同步修改输出转移脚本的cron，来防止运行未完成就进行转移，导致文件破碎。**
 >
 > 2. ~~使用了 http://epg.51zmt.top:8000 的封面图匹配接口，请勿频繁请求，将会导致ip被封禁，建议一个星期运行一次。~~ 现在使用iptv盒子内置的台标
 # 配置文件
@@ -38,9 +43,10 @@
 >
 ## 解释
     "debug_mode": 0 调试模式, 会保存下来大量日志,默认关闭,
-    "main_version": "4.1.31",
-    "compile_version": "2.5r",
-    "host": "直播服务器地址，抓包获取",
+    "main_version": "4.1.39",
+    "compile_version": "3.0r",
+    "crypto_key": "3DES加密秘钥，大部分地区为000000或者999999。若手动解算，解算用python脚本：https://github.com/xinjiawei/iptv/blob/main/new.py",
+    "host": "直播服务器地址，抓包获取。在抓包数据中url格式是http://*.*.*.*:*/EPG/jsp/getchannellistHWCTC.jsp",
     "port": "直播服务器端口，抓包获取",
     "mac": "机顶盒mac，抓包获取或者机顶盒贴纸获取",
     "iptv_account": "iptv账号，抓包获取或营业厅获取或者设置页面获取",
@@ -52,7 +58,7 @@
     "syslog_host": "日志上报服务器地址, 如果报错就写127.0.0.1",
     "syslog_port": "日志上报服务器端口, 如果报错就写8080",
     "udpxy_host_url": "udpxy服务器播放地址前缀",
-    "epg_host_url": "epg服务器地址, 理论上和上方地址一样",
+    "epg_host_url": "epg服务器地址, 理论上和上方直播服务器地址一样。在抓包数据中url格式是http://*.*.*.*:*/VSP/V3/QueryPlaybillList",
     "epg_host_port": "epg服务器端口, 理论上和上方地址一样",
     "epg_during": "未来的epg时间，默认1.5天, 最好不动, 可能报错",
     "epg_before": "过去的epg时间，默认7.0天, 最好不动, 可能报错",
@@ -60,16 +66,17 @@
     "null_description": "此节目提供商暂时没有提供导播源",
     "nullepginfo": "暂无导播信息",
     "maxcount": "100 限制每天获取的epg数量",
-    "timedelay_cover_get": 100 最好不动, 可能报错,
-    "timedelay_epg_get": 100 最好不动, 可能报错
-    "basic_info_host": "注册管理服务器地址，抓包获取，目前发现填错好像也不影响使用"
+    "timedelay_cover_get": 100 单位ms，最好不动, 可能报错,
+    "timedelay_epg_get": 100 单位ms，最好不动, 可能报错
+    "basic_info_host": "注册管理服务器地址，抓包获取，目前发现填错好像也不影响使用。在抓包数据中url格式是http://*.*.*.*:*/registerData/registerData.ac"
     "basic_info_port": "注册管理服务器端口，抓包获取，目前发现填错好像也不影响使用"
 ## 示例参数
 `
 {
 "debug_mode": 0,
-"main_version": "4.1.37",
-"compile_version": "2.9r",
+"main_version": "4.1.39",
+"compile_version": "3.0r",
+"crypto_key":"999999",
 "host": "192.168.49.143",
 "port": "33200",
 "mac": "50:01:6B:24:**:**",
