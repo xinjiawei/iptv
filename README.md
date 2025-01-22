@@ -75,6 +75,7 @@
 "debug_mode": 0,
 "main_version": "4.1.37",
 "compile_version": "2.9r",
+"crypto_key":"999999",
 "host": "192.168.49.143",
 "port": "33200",
 "mac": "50:01:6B:24:**:**",
