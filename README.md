@@ -1,7 +1,8 @@
 # iptv 模拟（软终端，软iptv）
 |  运行架构   | 测试型号  | 地区 | 测试结果 |
 |  ----  | ----  | ---- | ---- |
-| x86_64  | EC6108V9U_pub_hbjdx | 河北张家口电信 | ✅ |
+| x86_64 unraid | EC6108V9U_pub_hbjdx | 河北张家口电信 | ✅ |
+| x86_64 openwrt | EC6108V9U_pub_hbjdx | 河北秦皇岛电信 | ✅ |
 ## 更新
 >
 > 2025.1.19 更新：支持获取过去7天epg来实现回放。新增配置参数epg_before，basic_info_host，basic_info_port。调整休眠为至少100ms，防止风控。修正live_v2_rtsp.m3u格式以支持aptv。
@@ -42,8 +43,8 @@
 >
 ## 解释
     "debug_mode": 0 调试模式, 会保存下来大量日志,默认关闭,
-    "main_version": "4.1.31",
-    "compile_version": "2.5r",
+    "main_version": "4.1.39",
+    "compile_version": "3.0r",
     "crypto_key": "3DES加密秘钥，大部分地区为000000或者999999。若手动解算，解算用python脚本：https://github.com/xinjiawei/iptv/blob/main/new.py",
     "host": "直播服务器地址，抓包获取。在抓包数据中url格式是http://*.*.*.*:*/EPG/jsp/getchannellistHWCTC.jsp",
     "port": "直播服务器端口，抓包获取",
@@ -73,8 +74,8 @@
 `
 {
 "debug_mode": 0,
-"main_version": "4.1.37",
-"compile_version": "2.9r",
+"main_version": "4.1.39",
+"compile_version": "3.0r",
 "crypto_key":"999999",
 "host": "192.168.49.143",
 "port": "33200",
