@@ -43,7 +43,7 @@
     "debug_mode": 0 调试模式, 会保存下来大量日志,默认关闭,
     "main_version": "4.1.31",
     "compile_version": "2.5r",
-    "host": "直播服务器地址，抓包获取",
+    "host": "直播服务器地址，抓包获取。在抓包数据中url格式是http://*.*.*.*:*/EPG/jsp/getchannellistHWCTC.jsp",
     "port": "直播服务器端口，抓包获取",
     "mac": "机顶盒mac，抓包获取或者机顶盒贴纸获取",
     "iptv_account": "iptv账号，抓包获取或营业厅获取或者设置页面获取",
@@ -55,7 +55,7 @@
     "syslog_host": "日志上报服务器地址, 如果报错就写127.0.0.1",
     "syslog_port": "日志上报服务器端口, 如果报错就写8080",
     "udpxy_host_url": "udpxy服务器播放地址前缀",
-    "epg_host_url": "epg服务器地址, 理论上和上方地址一样",
+    "epg_host_url": "epg服务器地址, 理论上和上方直播服务器地址一样。在抓包数据中url格式是http://*.*.*.*:*/VSP/V3/QueryPlaybillList",
     "epg_host_port": "epg服务器端口, 理论上和上方地址一样",
     "epg_during": "未来的epg时间，默认1.5天, 最好不动, 可能报错",
     "epg_before": "过去的epg时间，默认7.0天, 最好不动, 可能报错",
@@ -65,7 +65,7 @@
     "maxcount": "100 限制每天获取的epg数量",
     "timedelay_cover_get": 100 单位ms，最好不动, 可能报错,
     "timedelay_epg_get": 100 单位ms，最好不动, 可能报错
-    "basic_info_host": "注册管理服务器地址，抓包获取，目前发现填错好像也不影响使用"
+    "basic_info_host": "注册管理服务器地址，抓包获取，目前发现填错好像也不影响使用。在抓包数据中url格式是http://*.*.*.*:*/registerData/registerData.ac"
     "basic_info_port": "注册管理服务器端口，抓包获取，目前发现填错好像也不影响使用"
 ## 示例参数
 `
